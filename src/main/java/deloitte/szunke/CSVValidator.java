@@ -21,8 +21,7 @@ public class CSVValidator {
     private static String COLON = ":";
 	
 	public List<String> validate(String csvFilename, String csvSchemaFilename, 
-			boolean failFast, List<Substitution> pathSubstitutions, 
-			Boolean enforceCaseSensitivePathChecks){
+			boolean failFast, Boolean enforceCaseSensitivePathChecks){
 		errorMessages.clear();
 		try {
 			//Read and save the file headers
@@ -45,7 +44,8 @@ public class CSVValidator {
             	errorMessages.add("Columns headers don't match. Please check the CSV file.");
             }
             reader.close();
-            
+
+			List<Substitution> pathSubstitutions = new ArrayList<Substitution>();
             if(errorMessages.isEmpty()) {
 	            //Validate the file data	
             	List<FailMessage> messages = CsvValidator.validate(
